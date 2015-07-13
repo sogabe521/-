@@ -39,10 +39,10 @@ if (preg_match('/^[1-9][0-9]*$/', $_GET['page'])) {
 
 
 	$offset = COMMENTS_PER_PAGE * ($page - 1);
-	$sql = "select * from toiawase limit ".$offset.",".COMMENTS_PER_PAGE;
+	$sql = "select * from toiawase ORDER BY id DESC limit ".$offset.",".COMMENTS_PER_PAGE;
 
 foreach ($dbh->query($sql) as $row) {
- array_unshift($toiawase, $row);
+ array_push($toiawase, $row);
 }
 	$total = $dbh->query("select count(*) from toiawase")->fetchColumn();
 	$totalPages = ceil($total / COMMENTS_PER_PAGE);
